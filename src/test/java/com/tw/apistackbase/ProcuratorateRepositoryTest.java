@@ -45,6 +45,26 @@ public class ProcuratorateRepositoryTest {
         Assertions.assertEquals(procuratorate_2, result);
     }
 
+    @Test
+    public void should_return_basic_case_and_info_when_find_by_id() {
+        //given
+        CriminalInfomation criminalInfo_1 = new CriminalInfomation("aaa", "bbb");
+        CriminalCase criminalCase_1 = new CriminalCase("case1", new Date(1000), criminalInfo_1);
+
+        CriminalInfomation criminalInfo_2 = new CriminalInfomation("aaa", "bbb");
+        CriminalCase criminalCase_2 = new CriminalCase("case1", new Date(1000), criminalInfo_2);
+
+        List<CriminalCase> caseList = asList(criminalCase_1,criminalCase_2);
+
+        Procuratorate procuratorate = new Procuratorate("p1",caseList);
+        procuratorateRepository.save(procuratorate);
+
+        //when
+        Procuratorate result = procuratorateRepository.findById(procuratorate.getId()).get();
+
+        Assertions.assertEquals(
+                "{\"criminalCases\":[{\"criminalInfomation\":{\"id\":3,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":2,\"name\":\"case1\"},{\"criminalInfomation\":{\"id\":5,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":4,\"name\":\"case1\"}],\"id\":1,\"name\":\"p1\"}", JSON.toJSONString(result));
+    }
 
 
 

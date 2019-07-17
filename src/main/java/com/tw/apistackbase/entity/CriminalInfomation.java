@@ -17,8 +17,7 @@ public class CriminalInfomation {
     @Column(nullable=false,length =255)
     private String objCase;
 
-    public CriminalInfomation(Long id, String subCase, String objCase) {
-        this.id = id;
+    public CriminalInfomation( String subCase, String objCase) {
         this.subCase = subCase;
         this.objCase = objCase;
     }

@@ -17,6 +17,16 @@ public class CriminalCase {
     @Column(nullable=false)
     private Date date;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "info_id")
+    private CriminalInfomation criminalInfomation;
+
+    public CriminalCase(String name, Date date, CriminalInfomation criminalInfomation) {
+        this.name = name;
+        this.date = date;
+        this.criminalInfomation = criminalInfomation;
+    }
+
     public CriminalCase(String name, Date date) {
         this.name = name;
         this.date = date;
@@ -44,5 +54,13 @@ public class CriminalCase {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public CriminalInfomation getCriminalInfomation() {
+        return criminalInfomation;
+    }
+
+    public void setCriminalInfomation(CriminalInfomation criminalInfomation) {
+        this.criminalInfomation = criminalInfomation;
     }
 }

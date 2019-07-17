@@ -23,7 +23,7 @@ public class CriminalInfomationRepositoryTest {
     @Autowired
     private CriminalInfomationRepository criminalInfoRepository;
     @Test
-    public void should_return_case_when_find_by_id() {
+    public void should_return_case_info_when_find_by_id() {
         //given
         CriminalInfomation criminalInfo_1 = new CriminalInfomation("aaa","bbb");
         CriminalInfomation criminalInfo_2 = new CriminalInfomation("ccc","ddd");
@@ -37,5 +37,7 @@ public class CriminalInfomationRepositoryTest {
         //then
         Assertions.assertEquals(criminalInfo_2, resultInfo);
     }
+
+
 
 }

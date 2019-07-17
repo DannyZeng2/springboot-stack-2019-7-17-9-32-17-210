@@ -1,6 +1,8 @@
 package com.tw.apistackbase;
 
+import com.alibaba.fastjson.JSON;
 import com.tw.apistackbase.entity.CriminalCase;
+import com.tw.apistackbase.entity.CriminalInfomation;
 import com.tw.apistackbase.repository.CriminalCaseRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -90,6 +92,28 @@ public class CriminalCaseRepositoryTest {
 
         //then
         Assertions.assertEquals(2, criminalCaseRepository.findAll().size());
+    }
+
+    @Test
+    public void should_return_basic_case_and_info_when_find_by_id() {
+        //given
+        CriminalInfomation criminalInfo = new CriminalInfomation("aaa","bbb");
+        CriminalCase criminalCase = new CriminalCase("case1",new Date(1000),criminalInfo);
+
+        criminalCaseRepository.save(criminalCase);
+
+        //when
+        CriminalCase resultCase  = criminalCaseRepository.findById(criminalCase.getId()).get();
+
+        //then
+        Assertions.assertEquals(
+                "{\"criminalInfomation\":{" +
+                                 "\"id\":2," +
+                                 "\"objCase\":\"bbb\"," +
+                                 "\"subCase\":\"aaa\"}," +
+                        "\"date\":1000," +
+                        "\"id\":1," +
+                        "\"name\":\"case1\"}", JSON.toJSONString(resultCase));
     }
 
 

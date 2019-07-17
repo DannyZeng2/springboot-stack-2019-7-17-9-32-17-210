@@ -3,6 +3,7 @@ package com.tw.apistackbase;
 import com.alibaba.fastjson.JSON;
 import com.tw.apistackbase.entity.CriminalCase;
 import com.tw.apistackbase.entity.CriminalInfomation;
+import com.tw.apistackbase.entity.Procuratorate;
 import com.tw.apistackbase.repository.CriminalCaseRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -42,9 +43,9 @@ public class CriminalCaseRepositoryTest {
     @Test
     public void should_return_all_case_when_find_all_order_by_date() {
         //given
-        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000));
-        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000));
-        CriminalCase criminalCase_3 = new CriminalCase("ccc",new Date(3000));
+        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000),new Procuratorate("p1"));
+        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000),new Procuratorate("p2"));
+        CriminalCase criminalCase_3 = new CriminalCase("ccc",new Date(3000),new Procuratorate("p3"));
 
         criminalCaseRepository.save(criminalCase_1);
         criminalCaseRepository.save(criminalCase_2);
@@ -62,9 +63,9 @@ public class CriminalCaseRepositoryTest {
     @Test
     public void should_return_cases_when_find_by_name() {
         //given
-        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000));
-        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000));
-        CriminalCase criminalCase_3 = new CriminalCase("bbb",new Date(3000));
+        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000),new Procuratorate("p1"));
+        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000),new Procuratorate("p2"));
+        CriminalCase criminalCase_3 = new CriminalCase("bbb",new Date(3000),new Procuratorate("p3"));
 
         criminalCaseRepository.save(criminalCase_1);
         criminalCaseRepository.save(criminalCase_2);
@@ -79,9 +80,9 @@ public class CriminalCaseRepositoryTest {
     @Test
     public void should_detele_a_case_when_delete_by_id() {
         //given
-        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000));
-        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000));
-        CriminalCase criminalCase_3 = new CriminalCase("bbb",new Date(3000));
+        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000),new Procuratorate("p1"));
+        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000),new Procuratorate("p2"));
+        CriminalCase criminalCase_3 = new CriminalCase("bbb",new Date(3000),new Procuratorate("p3"));
 
         criminalCaseRepository.save(criminalCase_1);
         criminalCaseRepository.save(criminalCase_2);
@@ -99,6 +100,7 @@ public class CriminalCaseRepositoryTest {
         //given
         CriminalInfomation criminalInfo = new CriminalInfomation("aaa","bbb");
         CriminalCase criminalCase = new CriminalCase("case1",new Date(1000),criminalInfo);
+        criminalCase.setProcuratorate(new Procuratorate("p1"));
 
         criminalCaseRepository.save(criminalCase);
 
@@ -107,13 +109,7 @@ public class CriminalCaseRepositoryTest {
 
         //then
         Assertions.assertEquals(
-                "{\"criminalInfomation\":{" +
-                                 "\"id\":2," +
-                                 "\"objCase\":\"bbb\"," +
-                                 "\"subCase\":\"aaa\"}," +
-                        "\"date\":1000," +
-                        "\"id\":1," +
-                        "\"name\":\"case1\"}", JSON.toJSONString(resultCase));
+                "{\"criminalInfomation\":{\"id\":2,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":1,\"name\":\"case1\",\"procuratorate\":{\"id\":3,\"name\":\"p1\"}}", JSON.toJSONString(resultCase));
     }
 
 

@@ -26,6 +26,9 @@ public class Procuratorate {
     @OneToMany(mappedBy="procuratorate",cascade = CascadeType.ALL)
     private List<CriminalCase> criminalCases;
 
+    @OneToMany(mappedBy="procuratorate",cascade = CascadeType.ALL)
+    private List<Prosecutor> prosecutors;
+
     public Procuratorate(String name, List<CriminalCase> criminalCases) {
         this.name = name;
         this.criminalCases = criminalCases;
@@ -49,5 +52,13 @@ public class Procuratorate {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Prosecutor> getProsecutors() {
+        return prosecutors;
+    }
+
+    public void setProsecutors(List<Prosecutor> prosecutors) {
+        this.prosecutors = prosecutors;
     }
 }

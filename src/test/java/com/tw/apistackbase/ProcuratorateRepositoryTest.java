@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.tw.apistackbase.entity.CriminalCase;
 import com.tw.apistackbase.entity.CriminalInfomation;
 import com.tw.apistackbase.entity.Procuratorate;
+import com.tw.apistackbase.entity.Prosecutor;
 import com.tw.apistackbase.repository.CriminalCaseRepository;
 import com.tw.apistackbase.repository.ProcuratorateRepository;
 import org.junit.Test;
@@ -67,6 +68,22 @@ public class ProcuratorateRepositoryTest {
                 "{\"criminalCases\":[{\"criminalInfomation\":{\"id\":3,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":2,\"name\":\"case1\"},{\"criminalInfomation\":{\"id\":5,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":4,\"name\":\"case1\"}],\"id\":1,\"name\":\"p1\"}", JSON.toJSONString(result));
     }
 
+    @Test
+    public void should_return_include_prosecutor_when_find_procuratorate_info() {
+        //given
+        Prosecutor prosecutor_1 = new Prosecutor("Mike");
+        Prosecutor prosecutor_2 = new Prosecutor("Lily");
 
+        List<Prosecutor> prosecutors = asList(prosecutor_1,prosecutor_2);
 
+        Procuratorate procuratorate = new Procuratorate("p1");
+        procuratorate.setProsecutors(asList(prosecutor_1,prosecutor_2));
+        procuratorateRepository.save(procuratorate);
+
+        //when
+        Procuratorate result  = procuratorateRepository.findById(procuratorate.getId()).get();
+
+        //then
+        Assertions.assertEquals("{\"id\":1,\"name\":\"p1\",\"prosecutors\":[{\"id\":2,\"name\":\"Mike\"},{\"id\":3,\"name\":\"Lily\"}]}", JSON.toJSONString(result));
+    }
 }

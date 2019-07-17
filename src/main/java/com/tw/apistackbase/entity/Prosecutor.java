@@ -12,6 +12,10 @@ public class Prosecutor {
     @Column(nullable=false,unique=true,length =255)
     private String name;
 
+    @ManyToOne(cascade=CascadeType.ALL,optional=false)
+    @JoinColumn(name="pid")
+    private Procuratorate procuratorate;
+
     public Prosecutor(String name) {
         this.name = name;
     }

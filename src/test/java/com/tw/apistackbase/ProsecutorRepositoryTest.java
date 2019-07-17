@@ -28,7 +28,7 @@ public class ProsecutorRepositoryTest {
     private ProsecutorRepository prosecutorRepository;
 
     @Test
-    public void should_return_a_procuratorate_when_find_by_id() {
+    public void should_return_a_prosecutor_when_find_by_id() {
         //given
         Prosecutor prosecutor_1 = new Prosecutor("Mike");
         Prosecutor prosecutor_2 = new Prosecutor("Lily");
@@ -45,5 +45,9 @@ public class ProsecutorRepositoryTest {
         Assertions.assertEquals(prosecutor_2.getId(), result.getId());
         Assertions.assertEquals(prosecutor_2.getName(), result.getName());
     }
+
+
+
+
 
 }

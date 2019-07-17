@@ -31,6 +31,12 @@ public class CriminalCase {
         this.criminalInfomation = criminalInfomation;
     }
 
+    public CriminalCase(String name, Date date, Procuratorate procuratorate) {
+        this.name = name;
+        this.date = date;
+        this.procuratorate = procuratorate;
+    }
+
     public CriminalCase(String name, Date date) {
         this.name = name;
         this.date = date;

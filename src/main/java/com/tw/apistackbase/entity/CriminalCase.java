@@ -6,6 +6,7 @@ import java.util.Date;
 @Entity
 @Table
 public class CriminalCase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -15,6 +16,11 @@ public class CriminalCase {
 
     @Column(nullable=false)
     private Date date;
+
+    public CriminalCase(String name, Date date) {
+        this.name = name;
+        this.date = date;
+    }
 
     public Long getId() {
         return id;

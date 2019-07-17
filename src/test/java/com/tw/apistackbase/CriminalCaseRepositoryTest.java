@@ -58,7 +58,7 @@ public class CriminalCaseRepositoryTest {
     }
 
     @Test
-    public void should_return_a_case_when_find_by_name() {
+    public void should_return_cases_when_find_by_name() {
         //given
         CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000));
         CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000));
@@ -74,5 +74,23 @@ public class CriminalCaseRepositoryTest {
         //then
         Assertions.assertEquals(2, resultList.size());
     }
+    @Test
+    public void should_detele_a_case_when_delete_by_id() {
+        //given
+        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000));
+        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000));
+        CriminalCase criminalCase_3 = new CriminalCase("bbb",new Date(3000));
+
+        criminalCaseRepository.save(criminalCase_1);
+        criminalCaseRepository.save(criminalCase_2);
+        criminalCaseRepository.save(criminalCase_3);
+
+        //when
+        criminalCaseRepository.deleteById(criminalCase_2.getId());
+
+        //then
+        Assertions.assertEquals(2, criminalCaseRepository.findAll().size());
+    }
+
 
 }

@@ -42,7 +42,8 @@ public class ProcuratorateRepositoryTest {
         Procuratorate result  = procuratorateRepository.findById(procuratorate_2.getId()).get();
 
         //then
-        Assertions.assertEquals(procuratorate_2, result);
+        Assertions.assertEquals(procuratorate_2.getId(), result.getId());
+        Assertions.assertEquals(procuratorate_2.getName(), result.getName());
     }
 
     @Test

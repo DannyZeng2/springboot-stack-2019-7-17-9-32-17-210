@@ -34,6 +34,21 @@ public class CriminalCaseRepositoryTest {
 
         Assertions.assertEquals(criminalCase_1, resultCase);
     }
+    @Test
+    public void should_return_all_case_when_find_all_order_by_date() {
+        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000));
+        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000));
+        CriminalCase criminalCase_3 = new CriminalCase("bbb",new Date(3000));
 
+        criminalCaseRepository.save(criminalCase_1);
+        criminalCaseRepository.save(criminalCase_2);
+        criminalCaseRepository.save(criminalCase_3);
+
+        List<CriminalCase> resultList  = criminalCaseRepository.findByOrderByDateDesc();
+
+        Assertions.assertEquals(criminalCase_3, resultList.get(0));
+        Assertions.assertEquals(criminalCase_2, resultList.get(1));
+        Assertions.assertEquals(criminalCase_1, resultList.get(2));
+    }
 
 }

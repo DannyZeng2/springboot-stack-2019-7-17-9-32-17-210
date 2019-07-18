@@ -45,9 +45,4 @@ public class ProsecutorRepositoryTest {
         Assertions.assertEquals(prosecutor_2.getId(), result.getId());
         Assertions.assertEquals(prosecutor_2.getName(), result.getName());
     }
-
-
-
-
-
 }

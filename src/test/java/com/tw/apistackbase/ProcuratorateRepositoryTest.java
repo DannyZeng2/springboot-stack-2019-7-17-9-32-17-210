@@ -64,8 +64,8 @@ public class ProcuratorateRepositoryTest {
         //when
         Procuratorate result = procuratorateRepository.findById(procuratorate.getId()).get();
 
-        Assertions.assertEquals(
-                "{\"criminalCases\":[{\"criminalInfomation\":{\"id\":3,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":2,\"name\":\"case1\"},{\"criminalInfomation\":{\"id\":5,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":4,\"name\":\"case1\"}],\"id\":1,\"name\":\"p1\"}", JSON.toJSONString(result));
+        Assertions.assertEquals(JSON.toJSONString(procuratorate)
+                , JSON.toJSONString(result));
     }
 
     @Test
@@ -84,6 +84,6 @@ public class ProcuratorateRepositoryTest {
         Procuratorate result  = procuratorateRepository.findById(procuratorate.getId()).get();
 
         //then
-        Assertions.assertEquals("{\"id\":1,\"name\":\"p1\",\"prosecutors\":[{\"id\":2,\"name\":\"Mike\"},{\"id\":3,\"name\":\"Lily\"}]}", JSON.toJSONString(result));
+        Assertions.assertEquals(JSON.toJSONString(procuratorate), JSON.toJSONString(result));
     }
 }

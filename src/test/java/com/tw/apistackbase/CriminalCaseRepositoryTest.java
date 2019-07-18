@@ -6,6 +6,7 @@ import com.tw.apistackbase.entity.CriminalInfomation;
 import com.tw.apistackbase.entity.Procuratorate;
 import com.tw.apistackbase.repository.CriminalCaseRepository;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.runner.RunWith;
@@ -24,6 +25,12 @@ public class CriminalCaseRepositoryTest {
 
     @Autowired
     private CriminalCaseRepository criminalCaseRepository;
+
+    @AfterEach
+    public void initRepository() {
+
+
+    }
 
     @Test
     public void should_return_case_when_find_by_id() {
@@ -108,8 +115,7 @@ public class CriminalCaseRepositoryTest {
         CriminalCase resultCase  = criminalCaseRepository.findById(criminalCase.getId()).get();
 
         //then
-        Assertions.assertEquals(
-                "{\"criminalInfomation\":{\"id\":2,\"objCase\":\"bbb\",\"subCase\":\"aaa\"},\"date\":1000,\"id\":1,\"name\":\"case1\",\"procuratorate\":{\"id\":3,\"name\":\"p1\"}}", JSON.toJSONString(resultCase));
+        Assertions.assertEquals(JSON.toJSONString(criminalCase), JSON.toJSONString(resultCase));
     }
 
 
